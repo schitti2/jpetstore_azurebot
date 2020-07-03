@@ -1,9 +1,17 @@
 #Java
 #Checkout,Codescan,QualityCheck,Build,UploadArtifacts and Deploy To Webapp
 name: $(build.sourceBranchName)-$(Date:yyyyMMdd)$(Rev:.r)
-trigger: none
+# On PRs against master
 pr:
-  - master
+  branches:
+    include:
+    - master
+# Run on changes to master
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
 variables:
   sonarServiceConnection: 'sonar-ahold'
   sonarProjectKey: 'jpetstore'
